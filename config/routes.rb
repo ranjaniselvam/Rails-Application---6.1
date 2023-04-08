@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :topics do
-    resources :posts
+    resources :posts do
+      resources :comments ,only: [:create,:destroy]
+    end
   end
   root "articles#index"
   get 'articles/index'
