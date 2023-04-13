@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tag name:</strong>
+  <%= @tag.tag_name %>
+</p>
+
+<p>
+<h2 >Posts</h2>
+<%if @posts.size > 0 %>
+    <% @posts.each do |post| %>
+   <li><%=link_to post.about , topic_post_path(post.topic,post) %></li>
+<% end %>
+<%  end %>
+</p>
+
+<%= link_to 'Edit', edit_tag_path(@tag) %> |
+<%= link_to 'Back', tags_path %>

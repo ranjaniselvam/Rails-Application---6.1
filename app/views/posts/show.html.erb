@@ -1,3 +1,17 @@
+<style>
+    .tag-pill {
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 16px;
+    }
+</style>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -9,6 +23,14 @@
 <!--  <strong>Topics:</strong>-->
   <%#= @post.topic_id %>
 <!--</p>-->
+<p>
+<strong> Tags </strong>
+<div class="tags">
+  <% @post.tags.each do |tag| %>
+    <span class="tag-pill"><%= tag.tag_name %></span>
+  <% end %>
+</div>
+</p>
 <p>
   <strong>Comments: </strong>
   <table>

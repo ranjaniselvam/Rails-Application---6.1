@@ -14,6 +14,16 @@
   <div class="field">
     <%= form.label :about %>
     <%= form.text_area :about %>
+
+    <%= form.fields_for :tags ,@post.tags.build do |tag| %>
+    <%= tag.label "Add New #tags" %>
+      <%= tag.text_field :tag_name %>
+      <% end %>
+
+    <% if Tag.any? %>
+      <%= form.label 'Choose tags' %>
+      <%= form.select :tag_ids, Tag.all.collect { |tag| [tag.tag_name, tag.id] }, { }, multiple: true %>
+    <% end %>
   </div>
 
 <!--  <div class="field">-->

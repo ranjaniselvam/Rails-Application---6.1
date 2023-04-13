@@ -29,6 +29,8 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = @topic.posts.build(post_params)
+    @post.tags = extract_tags_from_params(params[:post][:tags_attributes]['0'])
+    # create_or_delete_posts_tags(@post,params[:post][:tags])
     # @post.topic_id = params[:topic_id]
 
     respond_to do |format|
@@ -44,9 +46,11 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    @post.attributes = post_params
+    @post.tags = extract_tags_from_params(params[:post][:tags_attributes]['0'])
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to topic_post_path(@topic,@post), notice: "Post was successfully updated." }
+      if @post.save
+        format.html { redirect_to topic_post_path(@topic, @post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,6 +58,7 @@ class PostsController < ApplicationController
       end
     end
   end
+
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
@@ -76,6 +81,11 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:about,:content)
+      params.require(:post).permit(:about,:content,tags_attributes:[:tag_name],tag_ids:[])
     end
+
+  def extract_tags_from_params(tags_params)
+    tag_names = tags_params[:tag_name].split("#").map(&:strip).reject(&:blank?)
+    tag_names.map { |tag_name| Tag.find_or_create_by!(tag_name: tag_name) }
+  end
 end
