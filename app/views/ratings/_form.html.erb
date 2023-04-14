@@ -1,0 +1,12 @@
+<%= form_with(model: [@topic, @post, @post.ratings.build]) do |form| %>
+
+  <div>
+    <b><%= form.label :star, 'Add Rating...' %></b>
+    <%= form.collection_radio_buttons :star, (1..5).each.map { |n| [n, "#{n}⭐"] }, :first, :last do |b| %>
+      <%= b.radio_button %>
+      <%= b.label(style: 'display: inline') %>
+    <%  end %>
+    <%= form.submit 'Rate' %>
+  </div>
+
+<% end %>

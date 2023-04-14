@@ -9,6 +9,8 @@ class PostsController < ApplicationController
              else
                Post.includes(:topic).all
              end
+
+    @posts = @posts.paginate(page: params[:page])
   end
 
   # GET /posts/1 or /posts/1.json

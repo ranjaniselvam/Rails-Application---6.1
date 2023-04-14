@@ -52,7 +52,10 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-
+#testing
 group :development, :test do
   gem 'rspec-rails', '~> 6.0.0'
 end
+
+#pagination
+gem 'will_paginate', '~> 3.3'

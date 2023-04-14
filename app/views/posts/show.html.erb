@@ -30,7 +30,19 @@
     <span class="tag-pill"><%= tag.tag_name %></span>
   <% end %>
 </div>
+
+
+<p>
+  <strong>Ratings: </strong>
+  <% @post.ratings.group(:star).count.each_pair do |star ,count| %>
+    <span style="margin: 0 5px">
+        <%= "#{star}⭐ => #{count} " %>
+      </span>
+  <% end %>
+  <%= render 'ratings/form' %>
 </p>
+
+
 <p>
   <strong>Comments: </strong>
   <table>
@@ -40,14 +52,14 @@
         <tr>
           <td><%= comment.content %></td>
           <td> <%= time_ago_in_words(comment.created_at) %> ago</td>
-          <td><td><%= link_to "Destroy Comment", topic_post_comment_path(@topic,@post,comment), method: :delete ,data: { confirm: 'Are you sure?' }%></td></td>
+          <td><td><%= link_to "Destroy Comment", topic_post_comment_path(@topic,@post,comment), method: :delete ,data: { confirm: 'Are you sure?' }%></td>
         </tr>
       <% end %>
       <% end %>
         </tbody>
   </table>
   <%=render 'comments/form' %>
-</p>
+
 
 <%= link_to 'Edit', edit_topic_post_path(@topic,@post) %> |
 <%= link_to 'Back', topic_posts_path(@topic) %>
