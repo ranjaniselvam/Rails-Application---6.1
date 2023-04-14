@@ -12,5 +12,7 @@ class Post < ApplicationRecord
 
   has_many :ratings, dependent: :destroy
 
+  has_many_attached :images
+
 
 end

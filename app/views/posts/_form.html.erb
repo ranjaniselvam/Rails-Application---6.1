@@ -12,14 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :about %>
+    <%= form.label "Name" %>
     <%= form.text_area :about %>
+  </div>
 
+  <div class="field">
+    <%= form.label "Description :" %>
+    <%= form.text_area :description %>
+  </div>
+
+<div>
     <%= form.fields_for :tags ,@post.tags.build do |tag| %>
     <%= tag.label "Add New #tags" %>
       <%= tag.text_field :tag_name %>
       <% end %>
+  </div>
 
+  <div>
+    <%= form.label "Add Images",style: "display: block" %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+  <div>
     <% if Tag.any? %>
       <%= form.label 'Choose tags' %>
       <%= form.select :tag_ids, Tag.all.collect { |tag| [tag.tag_name, tag.id] }, { }, multiple: true %>

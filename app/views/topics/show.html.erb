@@ -4,11 +4,13 @@
   <strong>Title:</strong>
   <%= @topic.title %>
 </p>
-
 <p>
-  <strong>Description:</strong>
-  <%= @topic.description %>
+  <button> <%= link_to 'View Posts', topic_posts_path(@topic) %></button>
+
 </p>
 
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+
+<div>
+  <%= link_to 'Edit', edit_topic_path(@topic) %> |
+  <%= link_to 'Back', topics_path %>
+</div>

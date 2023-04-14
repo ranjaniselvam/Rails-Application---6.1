@@ -14,15 +14,26 @@
 </style>
 <p id="notice"><%= notice %></p>
 
+<h1>
+  <strong><%= @post.topic.title %> - <%= @post.about %></strong>
+</h1>
+
 <p>
-  <strong>Name:</strong>
-  <%= @post.about %>
+  <strong>Description:</strong>
+  <%= @post.description %>
 </p>
 
-<!--<p>-->
-<!--  <strong>Topics:</strong>-->
-  <%#= @post.topic_id %>
-<!--</p>-->
+
+  <p>
+    <% if @post.images.attached? %>
+  <strong>Images: </strong></p>
+  <% @post.images.each do |image| %>
+    <%= image_tag(image,style: "height: 250px;width: 250px") %>
+  <% end %>
+<% end %>
+
+
+
 <p>
 <strong> Tags </strong>
 <div class="tags">
